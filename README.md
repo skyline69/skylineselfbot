@@ -6,6 +6,8 @@
 
 ####  Note: ⭕ This selfbot is completly functional, but still in development.
 
+<a href="https://imgur.com/5DMO8NT"><img src="https://i.imgur.com/5DMO8NT.png" title="source: imgur.com" /></a>
+
 # Functions
 ### ✅ Purge messages!
 ### ✅ Nuke servers with custom channel-names!
@@ -19,5 +21,17 @@
 ### ✅ Customizable Logo- and Bordercolor!
 ### ✅ Customizable prefix!
 
-# Look
-<a href="https://imgur.com/NMKDGKO"><img src="https://i.imgur.com/NMKDGKO.png" title="source: imgur.com" /></a>
+# Demonstration
+<a href="https://imgur.com/yY2K3Eg"><img src="https://i.imgur.com/yY2K3Eg.gif" title="source: imgur.com" /></a>
+# Quick-Tutorial
+<div align="center">
+        <a href="https://imgur.com/Vz4lezR"><img src="https://i.imgur.com/Vz4lezR.gif" title="source: imgur.com" /></a>
+</div>
+
+## Configure Files
+> __**config.json**__
+#### You can change the logo- and border-color, if you change the variables in the ``config.json`` file.
+#### Also: You can change the prefix if you change the varibale of ``callsign`` in the ``config.json`` file.
+<a href="https://imgur.com/4SwMNtj"><img src="https://i.imgur.com/4SwMNtj.jpg?1" title="source: imgur.com" /></a>
+## How to use
+### To see the options that you can use with this selfbot, type `.h` in a channel.
