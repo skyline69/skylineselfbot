@@ -1,4 +1,0 @@
-pyowm
-colorama
-discord
-requests
