@@ -1,5 +1,6 @@
-from submain import main, apikey, callsign, channelnukename, token, installmods
+from submain import installmods
 installmods()
+from submain import main, apikey, callsign, channelnukename, token, installmods
 from os import system, name
 from discord.abc import *
 from colorama import init, Style, Fore
