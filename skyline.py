@@ -412,11 +412,21 @@ def main():
         
     
     @bot.command(pass_context=True)
+    @commands.has_permissions(administrator=True)
     async def ban(ctx, member : discord.Member):
         await ctx.message.delete()
         await member.ban()
         embed=discord.Embed(title="Done  :white_check_mark:", description=f":black_circle:  User banned. ", color=0x11019e)
         await ctx.send(embed=embed, delete_after=1.8)
+        
+    @bot.command(pass_context=True)
+    @commands.has_permissions(administrator=True)
+    async def kick(ctx, member : discord.Member):
+        await ctx.message.delete()
+        await member.kick()
+        embed=discord.Embed(title="Done  :white_check_mark:", description=f":black_circle:  User kicked. ", color=0x11019e)
+        await ctx.send(embed=embed, delete_after=1.8)
+
 
     @bot.command(aliases=["deleteall"])
     async def delall(ctx):
