@@ -33,7 +33,8 @@
 
 ## Configure Files
 > __**config.json**__
-#### You can change the logo- and border-color, if you change the variables in the ``config.json`` file.
-#### Also: You can change the prefix if you change the varibale of ``callsign`` in the ``config.json`` file.
+#### You can change the logo- and border-color, if you change the variables in the `config.json` file.
+#### Also: You can change the prefix if you change the varibale of ``callsign`` in the `config.json` file.
+#### If you want to change the channels, that are created while nuke, change the ``channelnukename`` varibale in the `config.json` file.
 <a href="https://imgur.com/4SwMNtj"><img src="https://i.imgur.com/4SwMNtj.jpg?1" title="source: imgur.com" /></a>
 
