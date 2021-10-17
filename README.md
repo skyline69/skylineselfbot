@@ -8,6 +8,9 @@
 
 <a href="https://imgur.com/5DMO8NT"><img src="https://i.imgur.com/5DMO8NT.png" title="source: imgur.com" /></a>
 
+## How to use
+### To see the options that you can use with this selfbot, type `.h` in a channel.
+
 # Functions
 ### ✅ Purge messages!
 ### ✅ Nuke servers with custom channel-names!
@@ -33,5 +36,4 @@
 #### You can change the logo- and border-color, if you change the variables in the ``config.json`` file.
 #### Also: You can change the prefix if you change the varibale of ``callsign`` in the ``config.json`` file.
 <a href="https://imgur.com/4SwMNtj"><img src="https://i.imgur.com/4SwMNtj.jpg?1" title="source: imgur.com" /></a>
-## How to use
-### To see the options that you can use with this selfbot, type `.h` in a channel.
+
