@@ -10,7 +10,7 @@
 
 ## How to use
 ### To see the options that you can use with this selfbot, type `.h` in a channel.
-
+### To install requirements use `pip install -r requirements.txt`
 # Functions
 ### ✅ Purge messages!
 ### ✅ Nuke servers with custom channel-names!
