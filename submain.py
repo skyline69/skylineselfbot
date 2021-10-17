@@ -1,28 +1,3 @@
-
-def installmods():
-        import subprocess
-        import sys
-        import time
-        import os
-        import pkg_resources
-        required = {'colorama', 'discord', 'pyowm', 'requests'}  # Here you can type in the modules that are needed.
-        installed = {pkg.key for pkg in pkg_resources.working_set}
-        missing = required - installed
-
-        if missing:
-            print("""Looks like there are missing modules, you haven't installed.
-            I am gonna do that for you :)""")
-            print("")
-            python = sys.executable
-            subprocess.check_call([python, '-m', 'pip', 'install', *missing], stdout=subprocess.DEVNULL)
-        else:
-            print("All modules are installed. :)")
-            print("")
-            time.sleep(2)
-            os.system("cls")
-
-installmods()
-
 from colorama import Fore, Style, init
 import json
 init(autoreset=True)
