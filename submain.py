@@ -21,6 +21,7 @@ def installmods():
             time.sleep(2)
             os.system("cls")
 
+installmods()
 
 from colorama import Fore, Style, init
 import json
