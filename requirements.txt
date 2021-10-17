@@ -27,7 +27,6 @@ cycler==0.10.0
 decorator==5.1.0
 discord==1.7.3
 discord.py==1.7.3
-discum @ git+https://github.com/Merubokkusu/Discord-S.C.U.M.git@0db5a0cec0beefdea0f5f5bda49ec9d079eac6fc
 distlib==0.3.3
 filelock==3.3.1
 filetype==1.0.8
