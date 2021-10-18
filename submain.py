@@ -86,6 +86,7 @@ elif bordercolor == "lightwhite":
 else:
     logocolor = Fore.WHITE
 
+# Logo
 class main:
     def hellomessage():
         sra = Style.RESET_ALL
