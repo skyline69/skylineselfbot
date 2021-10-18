@@ -42,7 +42,8 @@ def main():
         logocolor = dcj["logocolor"]
         
 
-    owm = pyowm.OWM(apikey)
+    owm = pyowm.OWM(apikey) # API key is for pyowm module
+
 
     if logocolor == "red":
         logocolor = Fore.RED
