@@ -467,18 +467,21 @@ def main():
         embed.set_image(url="{}".format(member.avatar_url))
         embed.set_footer(text='made by skyline69')
         await ctx.send(embed=embed)
-        
+
     @bot.command(aliases=["ig"])
     async def instagram(ctx, instaUsername):
         await ctx.message.delete()
-        bot = instaloader.Instaloader()
-        profile = instaloader.Profile.from_username(bot.context, str(instaUsername))
-        embed = discord.Embed(title=f"Instagram", color=0x11019e)
-        embed.add_field(name="Username", value=f"@{profile.username}", inline=True)
-        embed.add_field(name="Followers", value=f"{profile.followers}", inline=True)
-        embed.add_field(name="Follows", value=f"{profile.followees}", inline=True)
-        embed.add_field(name="Bio", value=f"{profile.biography}", inline=True)
-        await ctx.send(embed=embed)
+        try:
+            bot = instaloader.Instaloader()
+            profile = instaloader.Profile.from_username(bot.context, str(instaUsername))
+            embed = discord.Embed(title=f"Instagram", color=0x11019e)
+            embed.add_field(name="Username", value=f"@{profile.username}", inline=True)
+            embed.add_field(name="Followers", value=f"{profile.followers}", inline=True)
+            embed.add_field(name="Follows", value=f"{profile.followees}", inline=True)
+            embed.add_field(name="Bio", value=f"{profile.biography}", inline=True)
+            await ctx.send(embed=embed)
+        except:
+            pass
     
     @bot.command(aliases=["se"])
     async def spameveryone(ctx, word):
