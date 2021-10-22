@@ -1,6 +1,5 @@
 from os import environ
 environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
-from requests.api import delete
 from submain import main, apikey, callsign, channelnukename, token, version_
 from os import system, name
 from discord.abc import *
