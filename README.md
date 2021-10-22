@@ -24,6 +24,7 @@
 ### ✅ Random Cat-pics with 1 command!
 ### ✅ Customizable Logo- and Bordercolor!
 ### ✅ Customizable prefix!
+### ✅ Get avatar-pic from user!
 
 # Demonstration
 <a href="https://imgur.com/yY2K3Eg"><img src="https://i.imgur.com/yY2K3Eg.gif" title="source: imgur.com" /></a>
