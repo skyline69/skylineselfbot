@@ -6,7 +6,7 @@ file = "data\data.json"
 
 with open(file, "r") as f:
     data = json.load(f)
-    version = data["version"]
+    version_ = data["version"]
 with open("data\\api_key.json", "r") as a:
     ak = json.load(a)
     apikey = ak["api_key"]
@@ -104,4 +104,4 @@ class main:
 """)
         print(f"                                                 {bordercolor}╔══════════════════╗{sra}               ")
         print(f"                                                 {bordercolor}║{Fore.LIGHTRED_EX}Made by {Fore.LIGHTCYAN_EX}@Skyline69{bordercolor}║{sra}")
-        print(f"                                                 {bordercolor}║{sra} Version: {Fore.YELLOW}{version}{bordercolor}   ║{sra}")
+        print(f"                                                 {bordercolor}║{sra} Version: {Fore.YELLOW}{version_}{bordercolor}   ║{sra}")
