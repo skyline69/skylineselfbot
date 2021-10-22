@@ -473,18 +473,15 @@ def main():
         from os import environ
         environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  
         await ctx.message.delete()
-        try:
-            bot = instaloader.Instaloader()
-            profile = instaloader.Profile.from_username(bot.context, str(instaUsername))
-            embed = discord.Embed(title=f"Instagram", color=0x11019e)
-            embed.add_field(name="Username", value=f"@{profile.username}", inline=True)
-            embed.add_field(name="Followers", value=f"{profile.followers}", inline=True)
-            embed.add_field(name="Follows", value=f"{profile.followees}", inline=True)
-            embed.add_field(name="Bio", value=f"{profile.biography}", inline=True)
-            embed.set_footer(text="made by skyline69")
-            await ctx.send(embed=embed)
-        except:
-            pass
+        bot = instaloader.Instaloader()
+        profile = instaloader.Profile.from_username(bot.context, str(instaUsername))
+        embed = discord.Embed(title=f"Instagram", color=0x11019e)
+        embed.add_field(name="Username", value=f"@{profile.username}", inline=True)
+        embed.add_field(name="Followers", value=f"{profile.followers}", inline=True)
+        embed.add_field(name="Follows", value=f"{profile.followees}", inline=True)
+        embed.add_field(name="Bio", value=f"{profile.biography}", inline=True)
+        embed.set_footer(text="made by skyline69")
+        await ctx.send(embed=embed)    
     
     @bot.command(aliases=["se"])
     async def spameveryone(ctx, word):
