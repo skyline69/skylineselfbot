@@ -1,27 +1,3 @@
-
-def installmods():
-        import subprocess
-        import sys
-        import time
-        import os
-        import pkg_resources
-        required = {'colorama', 'discord', 'pyowm', 'requests'}  # Here you can type in the modules that are needed.
-        installed = {pkg.key for pkg in pkg_resources.working_set}
-        missing = required - installed
-
-        if missing:
-            print("""Looks like there are missing modules, you haven't installed.
-            I am gonna do that for you :)""")
-            print("")
-            python = sys.executable
-            subprocess.check_call([python, '-m', 'pip', 'install', *missing], stdout=subprocess.DEVNULL)
-        else:
-            print("All modules are installed. :)")
-            print("")
-            time.sleep(2)
-            os.system("cls")
-
-
 from colorama import Fore, Style, init
 import json
 init(autoreset=True)
@@ -30,7 +6,7 @@ file = "data\data.json"
 
 with open(file, "r") as f:
     data = json.load(f)
-    version = data["version"]
+    version_ = data["version"]
 with open("data\\api_key.json", "r") as a:
     ak = json.load(a)
     apikey = ak["api_key"]
@@ -110,6 +86,7 @@ elif bordercolor == "lightwhite":
 else:
     logocolor = Fore.WHITE
 
+# Logo
 class main:
     def hellomessage():
         sra = Style.RESET_ALL
@@ -127,4 +104,4 @@ class main:
 """)
         print(f"                                                 {bordercolor}╔══════════════════╗{sra}               ")
         print(f"                                                 {bordercolor}║{Fore.LIGHTRED_EX}Made by {Fore.LIGHTCYAN_EX}@Skyline69{bordercolor}║{sra}")
-        print(f"                                                 {bordercolor}║{sra} Version: {Fore.YELLOW}{version}{bordercolor}   ║{sra}")
+        print(f"                                                 {bordercolor}║{sra} Version: {Fore.YELLOW}{version_}{bordercolor}   ║{sra}")

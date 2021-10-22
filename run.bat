@@ -1,0 +1,5 @@
+@echo off
+cls
+pip install -r requirements.txt
+cls
+python skyline.py

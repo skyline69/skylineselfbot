@@ -1,5 +1,7 @@
-from submain import main, apikey, callsign, channelnukename, token, installmods
-installmods()
+from os import environ
+environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
+from requests.api import delete
+from submain import main, apikey, callsign, channelnukename, token, version_
 from os import system, name
 from discord.abc import *
 from colorama import init, Style, Fore
@@ -7,7 +9,7 @@ import json
 import discord
 from time import sleep
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 import pyowm
 from random import *
 import requests
@@ -28,7 +30,7 @@ sra = Style.RESET_ALL
 
 
 
-main.hellomessage()
+main.hellomessage() # beginning
 
 
 def main():
@@ -42,7 +44,8 @@ def main():
         logocolor = dcj["logocolor"]
         
 
-    owm = pyowm.OWM(apikey)
+    owm = pyowm.OWM(apikey) # API key is for pyowm module
+
 
     if logocolor == "red":
         logocolor = Fore.RED
@@ -183,13 +186,17 @@ def main():
         embed.add_field(name=f"{callsign}purge (a number)", value="to purge all of your messages.", inline=True)
         embed.add_field(name=f"{callsign}nuke", value="create a lot of channels.", inline=False)
         embed.add_field(name=f"{callsign}h, {callsign}hlp", value="to get the help window.", inline=False)
+        embed.add_field(name=f"{callsign}version, {callsign}v", value="shows you the current version of the bot.", inline=False)
         embed.add_field(name=f"{callsign}ping", value="so you can check the ping-latency.", inline=False)
         embed.add_field(name=f"{callsign}ban (an user)", value="quickly ban a user.", inline=True)
         embed.add_field(name=f"{callsign}kick (an user)", value="to kick a user quickly.", inline=False)
         embed.add_field(name=f"{callsign}delall, {callsign}deleteall", value="delete all channel in a server.", inline=False)
         embed.add_field(name=f"{callsign}weather, {callsign}we (a place)", value="gives weather information about this place.", inline=False)
         embed.add_field(name=f"{callsign}cat, {callsign}catimg, {callsign}catpic", value="shows you random cat pics.", inline=True)
-        embed.add_field(name=f"{callsign}meme, {callsign}Meme, {callsign}mem", value="shows you random memes from the internet.", inline=True)
+        embed.add_field(name=f"{callsign}meme, {callsign}Meme, {callsign}mem", value="shows you random memes from the internet.", inline=False)
+        embed.add_field(name=f"{callsign}spameveryone (word), {callsign}se (word)", value="spams with @everyone in the chat.", inline=False)
+        embed.add_field(name=f"{callsign}avatar (user), {callsign}a (user)", value="will give you the profile picture of the user u mentioned", inline=False)
+        embed.add_field(name=f"{callsign}quitt, {callsign}q", value="quit program.", inline=True)
         embed.set_image(url = 'https://c.tenor.com/T2K-oDCSFFoAAAAC/drift-tokyo.gif')
         embed.set_footer(text="made by skyline69")
         await ctx.send(embed=embed)
@@ -412,10 +419,19 @@ def main():
         
     
     @bot.command(pass_context=True)
+    @commands.has_permissions(administrator=True)
     async def ban(ctx, member : discord.Member):
         await ctx.message.delete()
         await member.ban()
         embed=discord.Embed(title="Done  :white_check_mark:", description=f":black_circle:  User banned. ", color=0x11019e)
+        await ctx.send(embed=embed, delete_after=1.8)
+
+    @bot.command(pass_context=True)
+    @commands.has_permissions(administrator=True)
+    async def kick(ctx, member : discord.Member):
+        await ctx.message.delete()
+        await member.kick()
+        embed=discord.Embed(title="Done  :white_check_mark:", description=f":black_circle:  User kicked. ", color=0x11019e)
         await ctx.send(embed=embed, delete_after=1.8)
 
     @bot.command(aliases=["deleteall"])
@@ -441,7 +457,25 @@ def main():
         meme.set_image(url=f"{data['url']}")
         meme.set_footer(text='made by skyline69')
         await ctx.send(embed=meme)
+    
+    @bot.command(aliases=["av"])
+    async def getavatar(ctx,  member: discord.Member=None):
+        await ctx.message.delete()
+        embed = discord.Embed(title=f"Profile picture of {member.display_name} ", color=0x11019e)
+        embed.set_image(url="{}".format(member.avatar_url))
+        embed.set_footer(text='made by skyline69')
+        await ctx.send(embed=embed)
 
+    
+    @bot.command(aliases=["se"])
+    async def spameveryone(ctx, word):
+        await ctx.message.delete()
+        while True:
+            await ctx.send('@everyone ' + word)
+            sleep(0.000000000000000000001)
+    @bot.command(aliases=["q"])
+    async def quitt(ctx):
+        quit()
     @bot.command(aliases=["we"])
     async def weather(ctx, city):
         await ctx.message.delete()
@@ -463,7 +497,12 @@ def main():
         embed2.set_footer(text="made by skyline69")
         await ctx.send(embed=embed2)
         
-
+    @bot.command(aliases=["v"])
+    async def version(ctx):
+        await ctx.message.delete()
+        VersionEmbed = discord.Embed(title=f"Version: {version_}", color=0x11019e)
+        VersionEmbed.set_footer(text="made by skyline69")
+        await ctx.send(embed=VersionEmbed, delete_after=3)
     @bot.event
     async def on_command_error(ctx, error):
         pass
