@@ -197,7 +197,7 @@ def main():
         embed.add_field(name=f"{callsign}meme, {callsign}Meme, {callsign}mem", value="shows you random memes from the internet.", inline=False)
         embed.add_field(name=f"{callsign}spameveryone (word), {callsign}se (word)", value="spams with @everyone in the chat.", inline=False)
         embed.add_field(name=f"{callsign}instagram (username), {callsign}ig (username)", value="gives Instagram information about the person.", inline=False)
-        embed.add_field(name=f"{callsign}avatar (user), {callsign}a (user)", value="will give you the profile picture of the user u mentioned", inline=False)
+        embed.add_field(name=f"{callsign}avatar (user), {callsign}av (user)", value="will give you the profile picture of the user u mentioned", inline=False)
         embed.add_field(name=f"{callsign}quitt, {callsign}q", value="quit program.", inline=True)
         embed.set_image(url = 'https://c.tenor.com/T2K-oDCSFFoAAAAC/drift-tokyo.gif')
         embed.set_footer(text="made by skyline69")
