@@ -27,12 +27,6 @@
 ### ✅ Customizable prefix!
 ### ✅ Get avatar-pic from user!
 
-# Demonstration
-<a href="https://imgur.com/yY2K3Eg"><img src="https://i.imgur.com/yY2K3Eg.gif" title="source: imgur.com" /></a>
-# Quick-Tutorial
-<div align="center">
-        <a href="https://imgur.com/Vz4lezR"><img src="https://i.imgur.com/Vz4lezR.gif" title="source: imgur.com" /></a>
-</div>
 
 ## Configure Files
 > __**config.json**__
