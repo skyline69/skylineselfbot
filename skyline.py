@@ -470,6 +470,8 @@ def main():
 
     @bot.command(aliases=["ig"])
     async def instagram(ctx, instaUsername):
+        from os import environ
+        environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  
         await ctx.message.delete()
         try:
             bot = instaloader.Instaloader()
