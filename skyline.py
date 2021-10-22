@@ -13,6 +13,7 @@ from discord.ext import commands, tasks
 import pyowm
 from random import *
 import requests
+import instaloader
 
 system("title skyline")
 def clearScreen(): 
@@ -195,6 +196,7 @@ def main():
         embed.add_field(name=f"{callsign}cat, {callsign}catimg, {callsign}catpic", value="shows you random cat pics.", inline=True)
         embed.add_field(name=f"{callsign}meme, {callsign}Meme, {callsign}mem", value="shows you random memes from the internet.", inline=False)
         embed.add_field(name=f"{callsign}spameveryone (word), {callsign}se (word)", value="spams with @everyone in the chat.", inline=False)
+        embed.add_field(name=f"{callsign}instagram (username), {callsign}ig (username)", value="gives Instagram information about the person.", inline=False)
         embed.add_field(name=f"{callsign}avatar (user), {callsign}a (user)", value="will give you the profile picture of the user u mentioned", inline=False)
         embed.add_field(name=f"{callsign}quitt, {callsign}q", value="quit program.", inline=True)
         embed.set_image(url = 'https://c.tenor.com/T2K-oDCSFFoAAAAC/drift-tokyo.gif')
@@ -465,7 +467,18 @@ def main():
         embed.set_image(url="{}".format(member.avatar_url))
         embed.set_footer(text='made by skyline69')
         await ctx.send(embed=embed)
-
+        
+    @bot.command(aliases=["ig"])
+    async def instagram(ctx, instaUsername):
+        await ctx.message.delete()
+        bot = instaloader.Instaloader()
+        profile = instaloader.Profile.from_username(bot.context, str(instaUsername))
+        embed = discord.Embed(title=f"Instagram", color=0x11019e)
+        embed.add_field(name="Username", value=f"@{profile.username}", inline=True)
+        embed.add_field(name="Followers", value=f"{profile.followers}", inline=True)
+        embed.add_field(name="Follows", value=f"{profile.followees}", inline=True)
+        embed.add_field(name="Bio", value=f"{profile.biography}", inline=True)
+        await ctx.send(embed=embed)
     
     @bot.command(aliases=["se"])
     async def spameveryone(ctx, word):
