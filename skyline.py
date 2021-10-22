@@ -481,6 +481,7 @@ def main():
             embed.add_field(name="Followers", value=f"{profile.followers}", inline=True)
             embed.add_field(name="Follows", value=f"{profile.followees}", inline=True)
             embed.add_field(name="Bio", value=f"{profile.biography}", inline=True)
+            embed.set_footer(text="made by skyline69")
             await ctx.send(embed=embed)
         except:
             pass
