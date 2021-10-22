@@ -18,6 +18,7 @@
 ### ✅ Quickban Users!
 ### ✅ Quickkick Users!
 ### ✅ Build-in spammer with @everyone
+### ✅ Instagram-API build in!
 ### ✅ Delete all channels in a Server with 1 command!
 ### ✅ Check real-live Weather Information!
 ### ✅ Random memes with 1 command!
