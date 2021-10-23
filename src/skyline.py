@@ -185,7 +185,7 @@ def main():
         embed=Embed(title="Help", color=0x11019e)
         embed.add_field(name=f"{callsign}purge (a number)", value="to purge all of your messages.", inline=True)
         embed.add_field(name=f"{callsign}nuke", value="create a lot of channels.", inline=False)
-        embed.add_field(name=f"{callsign}h, {callsign}hlp", value="to get the help window.", inline=False)
+        #embed.add_field(name=f"{callsign}h, {callsign}hlp", value="to get the help window.", inline=False)
         embed.add_field(name=f"{callsign}version, {callsign}v", value="shows you the current version of the bot.", inline=False)
         embed.add_field(name=f"{callsign}ping", value="so you can check the ping-latency.", inline=False)
         embed.add_field(name=f"{callsign}ban (an user)", value="quickly ban a user.", inline=True)
