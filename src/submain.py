@@ -1,23 +1,23 @@
 from colorama import Fore, Style, init
-import json
+from json import load, load
 init(autoreset=True)
 
 file = "data\data.json"
 
 with open(file, "r") as f:
-    data = json.load(f)
+    data = load(f)
     version_ = data["version"]
 with open("data\\api_key.json", "r") as a:
-    ak = json.load(a)
+    ak = load(a)
     apikey = ak["api_key"]
 with open("data\\config.json", "r") as j:
-    dcj = json.load(j)
+    dcj = load(j)
     bordercolor = dcj["bordercolor"]
     logocolor = dcj["logocolor"]
     callsign = dcj["callsign"]
     channelnukename = dcj["channelnukename"]
 with open("data\\token.discord", "r") as d:
-        dcf = json.load(d)
+        dcf = load(d)
         token = dcf["token"]
 
 if bordercolor == "red":

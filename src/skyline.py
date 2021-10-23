@@ -4,15 +4,15 @@ from submain import main, apikey, callsign, channelnukename, token, version_
 from os import system, name
 from discord.abc import *
 from colorama import init, Style, Fore
-import json
-import discord
+from json import load, loads
+from discord import Embed, Member
 from time import sleep
-import discord
-from discord.ext import commands, tasks
-import pyowm
+from discord.ext import commands
+from pyowm import OWM
 from random import *
-import requests
-import instaloader
+from requests import get
+from instaloader import Instaloader, Profile
+from random import randint
 
 system("title skyline")
 def clearScreen(): 
@@ -39,12 +39,12 @@ def main():
         clearScreen()
         main.hellomessage()
     with open("data\\config.json", "r") as j:
-        dcj = json.load(j)
+        dcj = load(j)
         bordercolor = dcj["bordercolor"]
         logocolor = dcj["logocolor"]
         
 
-    owm = pyowm.OWM(apikey) # API key is for pyowm module
+    owm = OWM(apikey) # API key is for pyowm module
 
 
     if logocolor == "red":
@@ -128,7 +128,7 @@ def main():
     TOKEN = str(token)
     bot = commands.Bot(callsign, self_bot=True)
 
-    client = discord.Client() 
+
     @bot.event
     async def on_ready():
         logged_in = True  
@@ -152,14 +152,14 @@ def main():
         await ctx.message.delete()
         if ctx.message.author.guild_permissions.manage_messages:
             if limit > 251:
-                embed = discord.Embed(title=":x:  Error!", description='Can not purge more than 250 Messages!', color=0x11019e)
+                embed = Embed(title=":x:  Error!", description='Can not purge more than 250 Messages!', color=0x11019e)
                 await ctx.send(embed=embed, delete_after=2.0) 
             else:
                 await ctx.channel.purge(limit=limit)
-                embed = discord.Embed(title="Done! :white_check_mark: ", description='Purge completed!', color=0x11019e)
+                embed = Embed(title="Done! :white_check_mark: ", description='Purge completed!', color=0x11019e)
                 await ctx.send(embed=embed, delete_after=2.0)
         else:
-            em = discord.Embed(title="Permissions Required!",
+            em = Embed(title="Permissions Required!",
                            description=f"{ctx.author.name} You do not have the required Permissions to use this command",
                            color=0x11019e)
             await ctx.send(embed=em)
@@ -176,13 +176,13 @@ def main():
     @bot.command() # Ping latency check.
     async def ping(ctx):
         await ctx.message.delete()
-        embed = discord.Embed(title="Pong!🏓", description=f'{round(bot.latency * 1000)}ms', color=0x11019e)
+        embed = Embed(title="Pong!🏓", description=f'{round(bot.latency * 1000)}ms', color=0x11019e)
         await ctx.send(embed=embed)
 
     @bot.command(aliases=["hlp"])
     async def h(ctx):
         await ctx.message.delete()
-        embed=discord.Embed(title="Help", color=0x11019e)
+        embed=Embed(title="Help", color=0x11019e)
         embed.add_field(name=f"{callsign}purge (a number)", value="to purge all of your messages.", inline=True)
         embed.add_field(name=f"{callsign}nuke", value="create a lot of channels.", inline=False)
         embed.add_field(name=f"{callsign}h, {callsign}hlp", value="to get the help window.", inline=False)
@@ -195,6 +195,7 @@ def main():
         embed.add_field(name=f"{callsign}cat, {callsign}catimg, {callsign}catpic", value="shows you random cat pics.", inline=True)
         embed.add_field(name=f"{callsign}meme, {callsign}Meme, {callsign}mem", value="shows you random memes from the internet.", inline=False)
         embed.add_field(name=f"{callsign}spameveryone (word), {callsign}se (word)", value="spams with @everyone in the chat.", inline=False)
+        embed.add_field(name=f"{callsign}dice, {callsign}di, {callsign}d", inline=True)
         embed.add_field(name=f"{callsign}instagram (username), {callsign}ig (username)", value="gives Instagram information about the person.", inline=False)
         embed.add_field(name=f"{callsign}avatar (user), {callsign}av (user)", value="will give you the profile picture of the user u mentioned", inline=False)
         embed.add_field(name=f"{callsign}quitt, {callsign}q", value="quit program.", inline=True)
@@ -414,25 +415,25 @@ def main():
             await guild2.create_voice_channel(name=channelName)
             await guild2.create_voice_channel(name=channelName)
         
-        embed=discord.Embed(title="Done  :white_check_mark:", description="Nuke completed.", color=0x11019e)
+        embed=Embed(title="Done  :white_check_mark:", description="Nuke completed.", color=0x11019e)
         await ctx.send(embed=embed, delete_after=1.8)
 
         
     
     @bot.command(pass_context=True)
     @commands.has_permissions(administrator=True)
-    async def ban(ctx, member : discord.Member):
+    async def ban(ctx, member : Member):
         await ctx.message.delete()
         await member.ban()
-        embed=discord.Embed(title="Done  :white_check_mark:", description=f":black_circle:  User banned. ", color=0x11019e)
+        embed=Embed(title="Done  :white_check_mark:", description=f":black_circle:  User banned. ", color=0x11019e)
         await ctx.send(embed=embed, delete_after=1.8)
 
     @bot.command(pass_context=True)
     @commands.has_permissions(administrator=True)
-    async def kick(ctx, member : discord.Member):
+    async def kick(ctx, member : Member):
         await ctx.message.delete()
         await member.kick()
-        embed=discord.Embed(title="Done  :white_check_mark:", description=f":black_circle:  User kicked. ", color=0x11019e)
+        embed=Embed(title="Done  :white_check_mark:", description=f":black_circle:  User kicked. ", color=0x11019e)
         await ctx.send(embed=embed, delete_after=1.8)
 
     @bot.command(aliases=["deleteall"])
@@ -443,26 +444,31 @@ def main():
     @bot.command(aliases=["catimg", "catpic"])
     async def cat(ctx):
         await ctx.message.delete()
-        r = requests.get("https://api.thecatapi.com/v1/images/search").json()
-        cat_embed = discord.Embed(title="Random cat picture.", color=0x11019e)
+        r = get("https://api.thecatapi.com/v1/images/search").json()
+        cat_embed = Embed(title="Random cat picture.", color=0x11019e)
         cat_embed.set_image(url=f"{r[0]['url']}")
         cat_embed.set_footer(text='made by skyline69')
         await ctx.send(embed=cat_embed)
 
+    @bot.command(aliases=["di", "d"])
+    async def dice(ctx):
+        await ctx.message.delete()
+        embedDice = Embed(title="🎲 Dice rolled.", description=f"Number: {randint(1, 6)}", color=0x11019e)
+        await ctx.send(embed=embedDice)
     @bot.command(aliases=["mem","Meme"])
     async def meme(ctx):
         await ctx.message.delete()
-        content = requests.get("https://meme-api.herokuapp.com/gimme/dankmemes").text
-        data = json.loads(content)
-        meme = discord.Embed(title=data['title'], url=data['postLink'], color=0x11019e)
+        content = get("https://meme-api.herokuapp.com/gimme/dankmemes").text
+        data = loads(content)
+        meme = Embed(title=data['title'], url=data['postLink'], color=0x11019e)
         meme.set_image(url=f"{data['url']}")
         meme.set_footer(text='made by skyline69')
         await ctx.send(embed=meme)
     
     @bot.command(aliases=["av"])
-    async def getavatar(ctx,  member: discord.Member=None):
+    async def getavatar(ctx,  member: Member=None):
         await ctx.message.delete()
-        embed = discord.Embed(title=f"Profile picture of {member.display_name} ", color=0x11019e)
+        embed = Embed(title=f"Profile picture of {member.display_name} ", color=0x11019e)
         embed.set_image(url="{}".format(member.avatar_url))
         embed.set_footer(text='made by skyline69')
         await ctx.send(embed=embed)
@@ -472,9 +478,9 @@ def main():
         from os import environ
         environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  
         await ctx.message.delete()
-        bot = instaloader.Instaloader()
-        profile = instaloader.Profile.from_username(bot.context, str(instaUsername))
-        embed = discord.Embed(title=f"Instagram", color=0x11019e)
+        bot = Instaloader()
+        profile = Profile.from_username(bot.context, str(instaUsername))
+        embed = Embed(title=f"Instagram", color=0x11019e)
         embed.add_field(name="Username", value=f"@{profile.username}", inline=True)
         embed.add_field(name="Followers", value=f"{profile.followers}", inline=True)
         embed.add_field(name="Follows", value=f"{profile.followees}", inline=True)
@@ -482,12 +488,13 @@ def main():
         embed.set_footer(text="made by skyline69")
         await ctx.send(embed=embed)    
     
+
     @bot.command(aliases=["se"])
     async def spameveryone(ctx, word):
         await ctx.message.delete()
         while True:
             await ctx.send('@everyone ' + word)
-            sleep(0.000000000000000000001)
+            sleep(0.012)
     @bot.command(aliases=["q"])
     async def quitt(ctx):
         quit()
@@ -504,7 +511,7 @@ def main():
         cleaned_wind_dir = (int(wind["deg"]))
         cleaned_wind_speed = (float(wind["speed"]))
         status = weather.detailed_status
-        embed2=discord.Embed(title=f"{city}", color=0x11019e)
+        embed2=Embed(title=f"{city}", color=0x11019e)
         embed2.add_field(name="Status", value=f"{status}", inline=True)
         embed2.add_field(name="Temperature", value=f"{cleaned_temp_data}°C", inline=False)
         embed2.add_field(name="Windspeed", value=f"{cleaned_wind_speed} km/h", inline=True)
@@ -515,7 +522,7 @@ def main():
     @bot.command(aliases=["v"])
     async def version(ctx):
         await ctx.message.delete()
-        VersionEmbed = discord.Embed(title=f"Version: {version_}", color=0x11019e)
+        VersionEmbed = Embed(title=f"Version: {version_}", color=0x11019e)
         VersionEmbed.set_footer(text="made by skyline69")
         await ctx.send(embed=VersionEmbed, delete_after=3)
     @bot.event
