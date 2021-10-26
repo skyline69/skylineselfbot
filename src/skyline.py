@@ -5,7 +5,7 @@ from os import system, name
 from discord.abc import *
 from colorama import init, Style, Fore
 from json import load, loads
-from discord import Embed, Member
+from discord import Embed, Member, File
 from time import sleep
 from discord.ext import commands
 from pyowm import OWM
@@ -13,6 +13,7 @@ from random import *
 from requests import get
 from instaloader import Instaloader, Profile
 from random import randint
+from qrcode import QRCode
 
 system("title skyline")
 def clearScreen(): 
@@ -126,7 +127,7 @@ def main():
         
 
     TOKEN = str(token)
-    bot = commands.Bot(callsign, self_bot=True)
+    bot = commands.Bot(callsign, self_bot=True, help_command=None)
 
 
     @bot.event
@@ -164,14 +165,6 @@ def main():
                            color=0x11019e)
             await ctx.send(embed=em)
 
-    
-    @bot.command(pass_context = True)
-    async def clear(ctx, number):
-        mgs = [] #Empty list to put all the messages in the log
-        number = int(number) #Converting the amount of messages to delete to an integer
-        async for x in bot.logs_from(ctx.message.channel, limit = number):
-            mgs.append(x)
-        await bot.delete_messages(mgs)
 
     @bot.command() # Ping latency check.
     async def ping(ctx):
@@ -179,29 +172,45 @@ def main():
         embed = Embed(title="Pong!🏓", description=f'{round(bot.latency * 1000)}ms', color=0x11019e)
         await ctx.send(embed=embed)
 
-    @bot.command(aliases=["hlp"])
-    async def h(ctx):
+    
+    @bot.command(aliases=["hlp", "h"])
+    async def help(ctx):
         await ctx.message.delete()
-        embed=Embed(title="Help", color=0x11019e)
-        embed.add_field(name=f"{callsign}purge (a number)", value="to purge all of your messages.", inline=True)
-        embed.add_field(name=f"{callsign}nuke", value="create a lot of channels.", inline=False)
-        #embed.add_field(name=f"{callsign}h, {callsign}hlp", value="to get the help window.", inline=False)
-        embed.add_field(name=f"{callsign}version, {callsign}v", value="shows you the current version of the bot.", inline=False)
-        embed.add_field(name=f"{callsign}ping", value="so you can check the ping-latency.", inline=False)
-        embed.add_field(name=f"{callsign}ban (an user)", value="quickly ban a user.", inline=True)
-        embed.add_field(name=f"{callsign}kick (an user)", value="to kick a user quickly.", inline=False)
-        embed.add_field(name=f"{callsign}delall, {callsign}deleteall", value="delete all channel in a server.", inline=False)
-        embed.add_field(name=f"{callsign}weather, {callsign}we (a place)", value="gives weather information about this place.", inline=False)
-        embed.add_field(name=f"{callsign}cat, {callsign}catimg, {callsign}catpic", value="shows you random cat pics.", inline=True)
-        embed.add_field(name=f"{callsign}meme, {callsign}Meme, {callsign}mem", value="shows you random memes from the internet.", inline=False)
-        embed.add_field(name=f"{callsign}spameveryone (word), {callsign}se (word)", value="spams with @everyone in the chat.", inline=False)
-        embed.add_field(name=f"{callsign}dice, {callsign}di, {callsign}d", inline=True)
-        embed.add_field(name=f"{callsign}instagram (username), {callsign}ig (username)", value="gives Instagram information about the person.", inline=False)
-        embed.add_field(name=f"{callsign}avatar (user), {callsign}av (user)", value="will give you the profile picture of the user u mentioned", inline=False)
-        embed.add_field(name=f"{callsign}quitt, {callsign}q", value="quit program.", inline=True)
-        embed.set_image(url = 'https://c.tenor.com/T2K-oDCSFFoAAAAC/drift-tokyo.gif')
-        embed.set_footer(text="made by skyline69")
-        await ctx.send(embed=embed)
+        help=Embed(title="Help", description="Here is all the help you need.", color=0x11019e)
+        help.add_field(name=f"{callsign}ping", value="so you can check the ping-latency.", inline=True)
+        help.add_field(name=f"{callsign}quitt,  {callsign}q", value="quit program.", inline=True)
+        help.add_field(name=f"{callsign}ban (an user)", value="quickly ban a user.", inline=False)
+        help.add_field(name=f"{callsign}kick (an user)", value="to kick a user quickly.", inline=False)
+        help.add_field(name=f"{callsign}nuke", value="create a lot of channels really fast.", inline=False)
+        help.add_field(name=f"{callsign}help,  {callsign}h,  {callsign}hlp", value="shows this help window.", inline=False)
+        help.add_field(name=f"{callsign}purge (a number)", value="to purge all of your messages.", inline=False)
+        help.add_field(name=f"{callsign}delall,  {callsign}deleteall", value="delete all channel in a server.", inline=False)
+        help.add_field(name=f"{callsign}weather,  {callsign}we (a place)", value="gives weather information about this place.", inline=False)
+        help.add_field(name=f"{callsign}cat,  {callsign}catimg,  {callsign}catpic", value="shows you random cat pics.", inline=False)
+        help.add_field(name=f"{callsign}meme,  {callsign}Meme,  {callsign}mem", value="shows you random memes from the internet.", inline=False)
+        help.add_field(name=f"{callsign}instagram (username),  {callsign}ig (username)", value="gives Instagram information about the person.", inline=True)
+        help.add_field(name=f"{callsign}qrcode (text),  {callsign}qr (text)", value="create a QR Code out of your text.", inline=False)
+        help.add_field(name=f"{callsign}spameveryone (word),  {callsign}se (word)", value="spams everyone with @everyone in the chat.", inline=False)
+        help.add_field(name=f"{callsign}avatar (user),  {callsign}av (user)", value="this will give you the profile picture of the user you mentioned.", inline=True)
+        help.set_image(url = 'https://c.tenor.com/T2K-oDCSFFoAAAAC/drift-tokyo.gif')
+        help.set_footer(text="made by skyline69")
+        await ctx.send(embed=help)
+
+    @bot.command(aliases=["qr"])
+    async def qrcode(ctx, *, inputofUser):
+        await ctx.message.delete()
+        qr = QRCode(version = 4, box_size = 10, border = 5)
+        data = str(inputofUser)
+        qr.add_data(data)
+        qr.make(fit = True)
+        img = qr.make_image(fill_color = "#8CD9FF" , back_color = "#151819") 
+        img.save("src\QR\qr.png")
+        file = File("src\QR\qr.png")       
+        EmbedQR = Embed(title="QR Code", color=0x11019e)
+        sleep(0.2)
+        EmbedQR.set_image(url="attachment://qr.png")
+        EmbedQR.set_footer(text="made by skyline69")
+        await ctx.send(embed=EmbedQR, file=file)
 
     @bot.command(pass_context=True)
     async def nuke(ctx, channelName=channelnukename):
