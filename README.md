@@ -3,7 +3,7 @@
 </div>
 
 ![Python Version](https://img.shields.io/badge/python-3.8-blue.svg?style=for-the-badge) ![License](https://img.shields.io/github/license/mashape/apistatus.svg?style=for-the-badge)
-
+# For this program you need **🟢Python 3.8** !
 ####  Note: ⭕ This selfbot is completly functional, but still in development.
 #### Type in your token in ``data\token.discord``!
 <a href="https://imgur.com/5DMO8NT"><img src="https://i.imgur.com/5DMO8NT.png" title="source: imgur.com" /></a>
@@ -26,6 +26,7 @@
 ### ✅ Customizable Logo- and Bordercolor!
 ### ✅ Customizable prefix!
 ### ✅ Get avatar-pic from user!
+### ✅ Roll dice!
 
 # Demonstration
 <a href="https://imgur.com/yY2K3Eg"><img src="https://i.imgur.com/yY2K3Eg.gif" title="source: imgur.com" /></a>
