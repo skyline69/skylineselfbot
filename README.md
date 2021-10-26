@@ -6,10 +6,11 @@
 # For this program you need **🟢Python 3.8** !
 ####  Note: ⭕ This selfbot is completly functional, but still in development.
 #### Type in your token in ``data\token.discord``!
+# Current Version:  `1.0.6`
 <a href="https://imgur.com/5DMO8NT"><img src="https://i.imgur.com/5DMO8NT.png" title="source: imgur.com" /></a>
 
 ## How to use
-### To see the options that you can use with this selfbot, type `.h` in a channel.
+### To see the options that you can use with this selfbot, type `.help` or `.h` in a channel.
 ### To install requirements use `pip install -r requirements.txt`(included in ``run.bat``)
 # Functions
 ### ✅ Purge messages!
@@ -27,6 +28,7 @@
 ### ✅ Customizable prefix!
 ### ✅ Get avatar-pic from user!
 ### ✅ Roll dice!
+### ✅ Easiely create QR-Codes from text!
 
 # Demonstration
 <a href="https://imgur.com/yY2K3Eg"><img src="https://i.imgur.com/yY2K3Eg.gif" title="source: imgur.com" /></a>
