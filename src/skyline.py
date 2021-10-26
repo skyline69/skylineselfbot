@@ -13,7 +13,7 @@ from random import *
 from requests import get
 from instaloader import Instaloader, Profile
 from random import randint
-from qrcode import QRCode
+
 
 system("title skyline")
 def clearScreen(): 
@@ -198,6 +198,7 @@ def main():
 
     @bot.command(aliases=["qr"])
     async def qrcode(ctx, *, inputofUser):
+        from qrcode import QRCode
         await ctx.message.delete()
         qr = QRCode(version = 4, box_size = 10, border = 5)
         data = str(inputofUser)
