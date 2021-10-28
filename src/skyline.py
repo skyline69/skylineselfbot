@@ -243,8 +243,6 @@ def main():
         embedPokemon.add_field(name="Stats", value=str(basestat), inline=True)
         embedPokemon.set_footer(text="made by skyline69")
 
-        await ctx.send("`Note: This is still in development.`")
-
         await ctx.send(embed=embedPokemon)
 
     @bot.command(pass_context=True)
