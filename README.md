@@ -29,6 +29,7 @@
 ### ✅ Get avatar-pic from user!
 ### ✅ Roll dice!
 ### ✅ Easiely create QR-Codes from text!
+### ✅ Easiely get information about Pokémon from a Database!
 
 # Demonstration
 <a href="https://imgur.com/yY2K3Eg"><img src="https://i.imgur.com/yY2K3Eg.gif" title="source: imgur.com" /></a>
