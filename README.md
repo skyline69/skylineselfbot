@@ -6,7 +6,7 @@
 # For this program you need **🟢Python 3.8** !
 ####  Note: ⭕ This selfbot is completly functional, but still in development.
 #### Type in your token in ``data\token.discord``!
-# Current Version:  `1.0.6`
+# Current Version:  `1.0.7`
 <a href="https://imgur.com/5DMO8NT"><img src="https://i.imgur.com/5DMO8NT.png" title="source: imgur.com" /></a>
 
 ## How to use
@@ -29,6 +29,7 @@
 ### ✅ Get avatar-pic from user!
 ### ✅ Roll dice!
 ### ✅ Easiely create QR-Codes from text!
+### ✅ Easiely get information about Pokémon from a Database!
 
 # Demonstration
 <a href="https://imgur.com/yY2K3Eg"><img src="https://i.imgur.com/yY2K3Eg.gif" title="source: imgur.com" /></a>
