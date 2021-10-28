@@ -190,10 +190,12 @@ def main():
         help.add_field(name=f"{callsign}meme,  {callsign}Meme,  {callsign}mem", value="shows you random memes from the internet.", inline=False)
         help.add_field(name=f"{callsign}instagram (username),  {callsign}ig (username)", value="gives Instagram information about the person.", inline=True)
         help.add_field(name=f"{callsign}qrcode (text),  {callsign}qr (text)", value="create a QR Code out of your text.", inline=False)
+        help.add_field(name=f"{callsign}pokemon (Pokémon-name),  {callsign}pk (Pokémon-name),  {callsign}poke (Pokémon-name)", value="get information about the pokemon.", inline=False)
         help.add_field(name=f"{callsign}spameveryone (word),  {callsign}se (word)", value="spams everyone with @everyone in the chat.", inline=False)
         help.add_field(name=f"{callsign}avatar (user),  {callsign}av (user)", value="this will give you the profile picture of the user you mentioned.", inline=True)
         help.set_image(url = 'https://c.tenor.com/T2K-oDCSFFoAAAAC/drift-tokyo.gif')
         help.set_footer(text="made by skyline69")
+        help.set_thumbnail(url = "https://cdn2.iconfinder.com/data/icons/blue-round-amazing-icons-2/512/question-512.png")
         await ctx.send(embed=help)
 
     @bot.command(aliases=["qr"])
@@ -212,6 +214,38 @@ def main():
         EmbedQR.set_image(url="attachment://qr.png")
         EmbedQR.set_footer(text="made by skyline69")
         await ctx.send(embed=EmbedQR, file=file)
+
+    @bot.command(aliases=["pk", "poke"])
+    async def pokemon(ctx, *, inputofPokemon):
+        await ctx.message.delete()
+        r = get(f'https://pokeapi.co/api/v2/pokemon/{inputofPokemon}').text
+        b = loads(r)
+
+        weight = b["weight"]/10
+        id_ = b["id"]
+        height = b["height"]*10
+        name = b["name"]
+
+        abilities_1 = b["abilities"][0]["ability"]
+        abilities_2 = b["abilities"][1]["ability"]
+        ability_name_1 = abilities_1["name"]
+        ability_name_2 = abilities_2["name"]
+        
+        basestat = b["stats"][0]["base_stat"]
+
+        embedPokemon = Embed(title=str(name.capitalize()), description="Information about " + str(name.capitalize()), color=0x11019e)
+        embedPokemon.set_author(name="Pokémon")
+        embedPokemon.set_thumbnail(url="http://pngimg.com/uploads/pokemon_logo/pokemon_logo_PNG12.png")
+        embedPokemon.add_field(name="ID", value=str(id_), inline=False)
+        embedPokemon.add_field(name="Abilities", value=f"{str(ability_name_1)},  {str(ability_name_2)},...", inline=False)
+        embedPokemon.add_field(name="Height", value=str(height) + "cm", inline=True)
+        embedPokemon.add_field(name="Weight", value=str(int(weight)) + " kg", inline=True)
+        embedPokemon.add_field(name="Stats", value=str(basestat), inline=True)
+        embedPokemon.set_footer(text="made by skyline69")
+
+        await ctx.send("`Note: This is still in development.`")
+
+        await ctx.send(embed=embedPokemon)
 
     @bot.command(pass_context=True)
     async def nuke(ctx, channelName=channelnukename):
@@ -491,7 +525,7 @@ def main():
         bot = Instaloader()
         profile = Profile.from_username(bot.context, str(instaUsername))
         embed = Embed(title=f"Instagram", color=0x11019e)
-        embed.add_field(name="Username", value=f"@{profile.username}", inline=True)
+        embed.add_field(name="Username", value=f"`@{profile.username}`", inline=True)
         embed.add_field(name="Followers", value=f"{profile.followers}", inline=True)
         embed.add_field(name="Follows", value=f"{profile.followees}", inline=True)
         embed.add_field(name="Bio", value=f"{profile.biography}", inline=True)
