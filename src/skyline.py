@@ -1,16 +1,16 @@
 from os import environ
 environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
-from submain import main, apikey, callsign, channelnukename, token, version_
+from submain import main, apikey, apikey_2, callsign, channelnukename, token, version_
 from os import system, name
 from discord.abc import *
 from colorama import init, Style, Fore
-from json import load, loads
+from json import load, loads, dumps
 from discord import Embed, Member, File
 from time import sleep
 from discord.ext import commands
 from pyowm import OWM
-from random import *
-from requests import get
+from random import randint, choice
+from requests import get, Session as sess
 from instaloader import Instaloader, Profile
 from random import randint
 
@@ -46,7 +46,6 @@ def main():
         
 
     owm = OWM(apikey) # API key is for pyowm module
-
 
     if logocolor == "red":
         logocolor = Fore.RED
@@ -185,9 +184,11 @@ def main():
         help.add_field(name=f"{callsign}help,  {callsign}h,  {callsign}hlp", value="shows this help window.", inline=False)
         help.add_field(name=f"{callsign}purge (a number)", value="to purge all of your messages.", inline=False)
         help.add_field(name=f"{callsign}delall,  {callsign}deleteall", value="delete all channel in a server.", inline=False)
-        help.add_field(name=f"{callsign}weather,  {callsign}we (a place)", value="gives weather information about this place.", inline=False)
+        help.add_field(name=f"{callsign}weather,  {callsign}we (a place),  {callsign}w (a place)", value="gives weather information about this place.", inline=False)
         help.add_field(name=f"{callsign}cat,  {callsign}catimg,  {callsign}catpic", value="shows you random cat pics.", inline=False)
+        help.add_field(name=f"{callsign}coinflip,  {callsign}cf", value="flip a coin.", inline=False)
         help.add_field(name=f"{callsign}meme,  {callsign}Meme,  {callsign}mem", value="shows you random memes from the internet.", inline=False)
+        help.add_field(name=f"{callsign}movie (movie name),  {callsign}mov (movie name),  {callsign}mv (movie name)", value="shows you information about the movie you typed in.", inline=False)
         help.add_field(name=f"{callsign}instagram (username),  {callsign}ig (username)", value="gives Instagram information about the person.", inline=True)
         help.add_field(name=f"{callsign}qrcode (text),  {callsign}qr (text)", value="create a QR Code out of your text.", inline=False)
         help.add_field(name=f"{callsign}pokemon (Pokémon-name),  {callsign}pk (Pokémon-name),  {callsign}poke (Pokémon-name)", value="get information about the pokemon.", inline=False)
@@ -214,6 +215,56 @@ def main():
         EmbedQR.set_image(url="attachment://qr.png")
         EmbedQR.set_footer(text="made by skyline69")
         await ctx.send(embed=EmbedQR, file=file)
+
+    @bot.command(aliases=["cf"])
+    async def coinflip(ctx):
+        await ctx.message.delete()
+        responses = ['heads.',
+                     'tails.']
+        if choice(responses) == responses[0]:
+            Head_Embed = Embed(title="Heads!", description="Coin landed on Head!", color=0x11019e)
+            Head_Embed.set_author(name="Coin flip")
+            Head_Embed.set_thumbnail(url="https://www.clker.com/cliparts/d/8/s/u/4/b/coin-1-md.png")
+            Head_Embed.set_footer(text="made by skyline69")
+            await ctx.send(embed=Head_Embed)
+            
+        elif choice(responses) == responses[1]:
+            Tail_Embed = Embed(title="Tails!", description="Coin landed on Tail!", color=0x11019e)
+            Tail_Embed.set_author(name="Coin flip")
+            Tail_Embed.set_thumbnail(url="https://clipground.com/images/one-dollar-clipart-10.jpg")
+            Tail_Embed.set_footer(text="made by skyline69")
+            await ctx.send(embed=Tail_Embed)
+
+
+    @bot.command(aliases=["mov", "mv"])
+    async def movie(ctx, *, inputofMovie):
+        from tmdbv3api import TMDb
+        from tmdbv3api import Movie
+        from tmdbv3api import Search
+
+        await ctx.message.delete()
+        
+        tmdb = TMDb()
+        movie = Movie()
+        search = Search()
+
+        tmdb.api_key = str(apikey_2)
+        tmdb.language = 'en'
+        tmdb.debug = True
+
+        movie = Movie()
+
+        search = movie.search(str(inputofMovie))
+    	
+        for res in search:
+            popularity = res["popularity"]
+            embedMovie = Embed(title=res.title, description=res.overview, color=0x11019e)
+            embedMovie.set_thumbnail(url = f"https://image.tmdb.org/t/p/original{res.poster_path}")
+            embedMovie.add_field(name="Release year", value=res["release_date"][0:4])
+            embedMovie.add_field(name="Popularity", value=str(round(popularity)))
+            embedMovie.set_footer(text="made by skyline69")
+            await ctx.send(embed=embedMovie)
+            break
 
     @bot.command(aliases=["pk", "poke"])
     async def pokemon(ctx, *, inputofPokemon):
@@ -536,11 +587,11 @@ def main():
         await ctx.message.delete()
         while True:
             await ctx.send('@everyone ' + word)
-            sleep(0.012)
+            sleep(0.12)
     @bot.command(aliases=["q"])
     async def quitt(ctx):
         quit()
-    @bot.command(aliases=["we"])
+    @bot.command(aliases=["we", "w"])
     async def weather(ctx, city):
         await ctx.message.delete()
         city2 = city
@@ -564,7 +615,7 @@ def main():
     @bot.command(aliases=["v"])
     async def version(ctx):
         await ctx.message.delete()
-        VersionEmbed = Embed(title=f"Version: {version_}", color=0x11019e)
+        VersionEmbed = Embed(title=f"Version: `{version_}`", color=0x11019e)
         VersionEmbed.set_footer(text="made by skyline69")
         await ctx.send(embed=VersionEmbed, delete_after=3)
     @bot.event

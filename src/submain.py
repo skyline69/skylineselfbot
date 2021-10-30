@@ -10,6 +10,7 @@ with open(file, "r") as f:
 with open("data\\api_key.json", "r") as a:
     ak = load(a)
     apikey = ak["api_key"]
+    apikey_2 = ak["api_key_moviedb"]
 with open("data\\config.json", "r") as j:
     dcj = load(j)
     bordercolor = dcj["bordercolor"]
