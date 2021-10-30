@@ -23,6 +23,7 @@
 ### ✅ Delete all channels in a Server with 1 command!
 ### ✅ Check real-live Weather Information!
 ### ✅ Random memes with 1 command!
+### ✅ Coin-flipper build in!
 ### ✅ Random Cat-pics with 1 command!
 ### ✅ Customizable Logo- and Bordercolor!
 ### ✅ Customizable prefix!
@@ -30,6 +31,7 @@
 ### ✅ Roll dice!
 ### ✅ Easiely create QR-Codes from text!
 ### ✅ Easiely get information about Pokémon from a Database!
+### ✅ You can look up information about a movie!
 
 # Demonstration
 <a href="https://imgur.com/yY2K3Eg"><img src="https://i.imgur.com/yY2K3Eg.gif" title="source: imgur.com" /></a>
