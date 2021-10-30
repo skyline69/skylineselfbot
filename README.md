@@ -7,7 +7,7 @@
 ####  Note: ⭕ This selfbot is completly functional, but still in development.
 #### Type in your token in ``data\token.discord``!
 # Current Version:  `1.0.8`
-<a href="https://imgur.com/5DMO8NT"><img src="https://i.imgur.com/5DMO8NT.png" title="source: imgur.com" /></a>
+<a href="https://youtu.be/dQw4w9WgXcQ"><img src="https://i.imgur.com/G2PA65B.png" title="source: imgur.com" /></a>
 
 ## How to use
 ### To see the options that you can use with this selfbot, type `.help` or `.h` in a channel.
@@ -34,12 +34,12 @@
 ### ✅ You can look up information about a movie!
 
 # Demonstration
-<a href="https://imgur.com/yY2K3Eg"><img src="https://i.imgur.com/yY2K3Eg.gif" title="source: imgur.com" /></a>
+<a href="https://youtu.be/dQw4w9WgXcQ"><img src="https://i.imgur.com/yY2K3Eg.gif" title="source: imgur.com" /></a>
 
 ## Configure Files
 > __**config.json**__
 #### You can change the logo- and border-color, if you change the variables in the `config.json` file.
 #### Also: You can change the prefix if you change the varibale of ``callsign`` in the `config.json` file.
 #### If you want to change the channels, that are created while nuke, change the ``channelnukename`` varibale in the `config.json` file.
-<a href="https://imgur.com/4SwMNtj"><img src="https://i.imgur.com/4SwMNtj.jpg?1" title="source: imgur.com" /></a>
+<a href="https://youtu.be/dQw4w9WgXcQ"><img src="https://i.imgur.com/4SwMNtj.jpg?1" title="source: imgur.com" /></a>
 
