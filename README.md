@@ -4,6 +4,7 @@
 
 ![Python Version](https://img.shields.io/badge/python-3.8-blue.svg?style=for-the-badge) ![License](https://img.shields.io/github/license/mashape/apistatus.svg?style=for-the-badge)
 # For this program you need **🟢Python 3.8** !
+## <a href="https://youtu.be/dQw4w9WgXcQ">Install 🟢Python 3.8.10 here
 ####  Note: ⭕ This selfbot is completly functional, but still in development.
 #### Type in your token in ``data\token.discord``!
 # Current Version:  `1.0.8`
