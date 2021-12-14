@@ -6,7 +6,7 @@
 # For this program you need **🟢Python 3.8** !
 ## <a href="https://www.python.org/downloads/release/python-3810/">Install 🟢Python 3.8.10 here
 ####  Note: ⭕ This selfbot is completly functional, but still in development.
-#### Type in your token in ``data\token.discord``!
+### - **Type in your token in ``data\token.discord``!**
 # Current Version:  `1.0.8`
 <a href="https://youtu.be/dQw4w9WgXcQ"><img src="https://i.imgur.com/G2PA65B.png" title="source: imgur.com" /></a>
 
